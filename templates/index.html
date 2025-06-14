@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Rent Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 20px;
+        }
+        .header .project-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header .ai-project {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 18px;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, select {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let bhk = document.getElementById('BHK').value;
+            let size = document.getElementById('Size').value;
+            let floor = document.getElementById('Floor').value;
+            let bathroom = document.getElementById('Bathroom').value;
+            if (isNaN(bhk) || isNaN(size) || isNaN(floor) || isNaN(bathroom)) {
+                alert("Please enter valid numeric values for BHK, Size, Floor, and Bathroom.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="project-name">House Rent Prediction</div>
+        <div class="ai-project">AI Project</div>
+    </div>
+    <div class="container">
+        <h2>House Rent Prediction</h2>
+        <form action="/predict" method="post" onsubmit="return validateForm()">
+            <label for="BHK">BHK</label>
+            <input type="number" id="BHK" name="BHK" required>
+
+            <label for="Size">Size (in sq ft)</label>
+            <input type="number" id="Size" name="Size" required>
+
+            <label for="Floor">Floor</label>
+            <input type="number" id="Floor" name="Floor" required>
+
+            <label for="Bathroom">Bathroom</label>
+            <input type="number" id="Bathroom" name="Bathroom" required>
+
+            <label for="Area Type">Area Type</label>
+            <select id="Area Type" name="Area Type" required>
+                <option value="Built Area">Built Area</option>
+                <option value="Super Area">Super Area</option>
+                <option value="Carpet Area">Carpet Area</option>
+            </select>
+
+            <label for="City">City</label>
+            <input type="text" id="City" name="City" required>
+
+            <label for="Furnishing Status">Furnishing Status</label>
+            <select id="Furnishing Status" name="Furnishing Status" required>
+                <option value="Furnished">Furnished</option>
+                <option value="Semi-Furnished">Semi-Furnished</option>
+                <option value="Unfurnished">Unfurnished</option>
+            </select>
+
+            <label for="AreaLocality">Area Locality</label>
+            <input type="text" id="AreaLocality" name="AreaLocality">
+
+            <label for="Tenant Preferred">Tenant Preferred</label>
+            <select id="Tenant Preferred" name="Tenant Preferred" required>
+                <option value="Bachelors">Bachelors</option>
+                <option value="Family">Family</option>
+                <option value="Bachelors/Family">Bachelors/Family</option>
+            </select>
+
+            <label for="Point of Contact">Point of Contact</label>
+            <select id="Point of Contact" name="Point of Contact" required>
+                <option value="Contact Builder">Contact Builder</option>
+                <option value="Contact Agent">Contact Agent</option>
+                <option value="Contact Owner">Contact Owner</option>
+                <option value="Contact Manager">Contact Manager</option>
+            </select>
+
+            <button type="submit">Predict Rent</button>
+        </form>
+        {% if prediction %}
+        <div class="result">
+            <p>Predicted Rent: RS: {{ prediction }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
