@@ -20,7 +20,7 @@ A machine learning-based web application that predicts house prices based on use
 - **Framework**: Flask
 - **Libraries**: Scikit-learn, Pandas, NumPy
 - **Model Files**: `model.pkl`, `scaler.pkl`, `train_columns.pkl`
-- **Frontend**: HTML (via Jinja templates)
+- **Frontend**: HTML 
 
 ---
 
